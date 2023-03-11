@@ -16,8 +16,8 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
@@ -30,3 +30,26 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+import { Autoplay, Navigation, Pagination } from "swiper";
+
+import Swiper from "swiper";
+
+Swiper.use([Autoplay, Navigation, Pagination]);
+
+//import {ShrinkText} from './ShrinkText/script';
+//import {Filter} from './Filter/script';
+//
+//import './blocks/menu-button/script';
+//import './blocks/menu/script';
+//import './blocks/search-icon/script';
+//import './blocks/button-up/script';
+//import './blocks/main-slider/script';
+//import './blocks/gallery/script';
+//import './blocks/wallpaper-slider/script';
+//import './blocks/tile-catalog/script';
+//import './blocks/about-us/script';
+//import './blocks/paint/script';
+//import './blocks/wallpaper-gallery/script';
+//import './blocks/advantages/script';
+//import './blocks/presentation/script';

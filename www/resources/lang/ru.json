@@ -1,0 +1,10 @@
+{
+	"Name": "Имя",
+	"Register": "Регистрация",
+	"Login": "Логин",
+	"Password": "Пароль",
+	"Email Address": "Адрес электронной почты",
+	"Confirm Password": "Подтвердите пароль",
+	"Remember Me": "Запомнить меня",
+	"Forgot Your Password?": "Забыли пароль?"
+}
