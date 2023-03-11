@@ -1,45 +1,32 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+//window.Vue = require('vue').default;
 
-require('./bootstrap');
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-window.Vue = require('vue').default;
+import { createApp } from 'vue';
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import router from './router';
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const Vue = createApp({});
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('v-header', require('./components/Header.vue').default);
+Vue.component('v-footer', require('./components/Footer.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(router);
 
-const app = new Vue({
-    el: '#app',
-});
+Vue.mount('#app');
+
+
 
 import { Autoplay, Navigation, Pagination } from "swiper";
-
 import Swiper from "swiper";
-
 Swiper.use([Autoplay, Navigation, Pagination]);
 
-//import {ShrinkText} from './ShrinkText/script';
-//import {Filter} from './Filter/script';
-//
+require('./bootstrap');
+//import {ShrinkText} from './blocks/ShrinkText/script';
+//import {Filter} from './blocks/Filter/script';
+
 //import './blocks/menu-button/script';
 //import './blocks/menu/script';
 //import './blocks/search-icon/script';
@@ -53,3 +40,4 @@ Swiper.use([Autoplay, Navigation, Pagination]);
 //import './blocks/wallpaper-gallery/script';
 //import './blocks/advantages/script';
 //import './blocks/presentation/script';
+//import './blocks/header/script';
