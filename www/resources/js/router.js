@@ -4,10 +4,10 @@
 //const Vue = require("vue");
 //const vueRouter = require("vue-router");
 
-import {createWebHistory, createRouter} from "vue-router";
+import { createWebHistory, createRouter, createWebHashHistory } from "vue-router";
 
 import Index from "./views/Index";
-import Contact from "./views/Index";
+import Contact from "./views/Contact";
 
 const routes = [
     {

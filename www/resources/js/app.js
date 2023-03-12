@@ -4,19 +4,20 @@
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import { createApp } from 'vue';
-
 import router from './router';
+import axios from 'axios'
+import VueAxios from 'vue-axios';
 
 const Vue = createApp({});
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('v-header', require('./components/Header.vue').default);
 Vue.component('v-footer', require('./components/Footer.vue').default);
 
 Vue.use(router);
+Vue.use(VueAxios, axios);
 
 Vue.mount('#app');
-
 
 
 import { Autoplay, Navigation, Pagination } from "swiper";

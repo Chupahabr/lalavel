@@ -8,7 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ __("Re-space") }}</title>
 
 
     <!-- Scripts -->
@@ -24,7 +24,7 @@
 <div id="app">
     <v-header></v-header>
     <router-view></router-view>
-    <example-component></example-component>
+<!--    <example-component></example-component>-->
     <v-footer></v-footer>
 </div>
 </body>

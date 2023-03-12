@@ -23,15 +23,15 @@
         <div class="header-main">
             <div class="container">
                 <div class="header-main__wrapper">
-                    <div class="logo">
+                    <router-link :to="pages.main.href" class="logo">
                         <img class="logo__image" src="icon/header/logo.png" alt="">
-                    </div>
+                    </router-link>
                     <div class="menu-list">
                         <a href="" class="menu-list__link">Обои</a>
                         <a href="" class="menu-list__link">Плитка</a>
                         <a href="" class="menu-list__link">Краски</a>
                         <a href="" class="menu-list__link">О компании</a>
-                        <a href="/contact" class="menu-list__link">Контакты</a>
+                        <router-link :to="pages.contact.href" class="menu-list__link">{{pages.contact.name}}</router-link>
                     </div>
                     <div class="search-icon search-icon_header">
                         <svg class="search-icon-svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -86,7 +86,7 @@
                             <span class="basket__count">3</span>
                         </div>
                     </div>
-                    <div class="menu-button">
+                    <div class="menu-button" @click="buttonClick">
                         <div class="menu-button__label">Меню</div>
                         <div class="menu-button__icon icon-menu">
                             <span></span>
@@ -111,7 +111,7 @@
                     <div class="menu__item">
                         <a class="menu__label">
                             Обои
-                            <img class="menu__arrow" src="icon/header/arrow.svg" alt="">
+                            <img class="menu__arrow" @click="arrowClick" src="icon/header/arrow.svg" alt="">
                         </a>
                         <div class="menu__sublist">
                             <a href="" class="menu__sublist-link">Цветы </a>
@@ -134,7 +134,7 @@
                     <div class="menu__item">
                         <a class="menu__label">
                             Плитка
-                            <img class="menu__arrow" src="icon/header/arrow.svg" alt="">
+                            <img class="menu__arrow" @click="arrowClick" src="icon/header/arrow.svg" alt="">
                         </a>
                         <div class="menu__sublist">
                             <a href="" class="menu__sublist-link">Красная </a>
@@ -147,7 +147,7 @@
                     <div class="menu__item">
                         <a class="menu__label">
                             Картины
-                            <img class="menu__arrow" src="icon/header/arrow.svg" alt="">
+                            <img class="menu__arrow" @click="arrowClick" src="icon/header/arrow.svg" alt="">
                         </a>
                         <div class="menu__sublist">
                             <a href="" class="menu__sublist-link">Квадратные картины </a>
@@ -159,7 +159,7 @@
                 <div class="menu__column">
                     <div class="menu__item">
                         <a class="menu__label">Краска
-                            <img class="menu__arrow" src="icon/header/arrow.svg" alt="">
+                            <img class="menu__arrow" @click="arrowClick" src="icon/header/arrow.svg" alt="">
                         </a>
                         <div class="menu__sublist">
                             <a href="" class="menu__sublist-link">Для стен </a>
@@ -174,7 +174,7 @@
                     <div class="menu__item">
                         <a class="menu__label">
                             Телепорт в нарнию
-                            <img class="menu__arrow" src="icon/header/arrow.svg" alt="">
+                            <img class="menu__arrow" @click="arrowClick" src="icon/header/arrow.svg" alt="">
                         </a>
                         <div class="menu__sublist">
                             <a href="" class="menu__sublist-link">Ну поехали</a>
@@ -219,52 +219,55 @@
 <script>
 export default {
     data() {
-        return {}
+        return {
+            pages: {
+                main: {
+                    name: "Главная",
+                    href: "/",
+                },
+                contact: {
+                    name: "Контакты",
+                    href: "/contact",
+                },
+            }
+        }
+    },
+    methods: {
+        buttonClick () {
+            const menu = document.querySelector('.menu');
+
+            if (menu.classList.contains('menu_active') && window.innerWidth < 992) {
+                const menuItem = document.querySelectorAll('.menu__item');
+                const arrow = document.querySelectorAll('.menu__arrow');
+
+                menuItem.forEach(item => {
+                        item.style.height = 30 + 'px';
+                        item.classList.remove('menu__item_active');
+                    }
+                );
+                arrow.forEach(item => {
+                    item.classList.remove('menu__arrow_active');
+                });
+            }
+            menu.classList.toggle('menu_active');
+        },
+        arrowClick (e) {
+            const targetElement = e.target;
+            const label = targetElement.parentElement;
+            const item = label.parentElement;
+            const sublist = label.nextElementSibling;
+            const arrow = label.querySelector('.menu__arrow');
+
+            if (item.classList.contains('menu__item_active')) {
+                item.style.height = 30 + 'px';
+            } else {
+                const countItem = sublist.childElementCount;
+                const itemHeight = countItem * 30 + 80;
+                item.style.height = itemHeight + 'px';
+            }
+            item.classList.toggle('menu__item_active');
+            arrow.classList.toggle('menu__arrow_active');
+        }
     }
 }
-
-window.addEventListener('click', (e) => {
-    const targetElement = e.target;
-
-    if (targetElement.closest('.menu-button')) {
-        const menu = document.querySelector('.menu');
-
-        if (menu.classList.contains('menu_active') && window.innerWidth < 992) {
-            const menuItem = document.querySelectorAll('.menu__item');
-            const arrow = document.querySelectorAll('.menu__arrow');
-
-            menuItem.forEach(item => {
-                    item.style.height = 30 + 'px';
-                    item.classList.remove('menu__item_active');
-                }
-            );
-            arrow.forEach(item => {
-                item.classList.remove('menu__arrow_active');
-            });
-        }
-        menu.classList.toggle('menu_active');
-    }
-});
-
-window.addEventListener('click', (e) => {
-    const targetElement = e.target;
-
-    if (targetElement.closest('.menu__arrow')) {
-        const label = targetElement.parentElement;
-        const item = label.parentElement;
-        const sublist = label.nextElementSibling;
-        const arrow = label.querySelector('.menu__arrow');
-
-        if (item.classList.contains('menu__item_active')) {
-            item.style.height = 30 + 'px';
-        } else {
-            const countItem = sublist.childElementCount;
-            const itemHeight = countItem * 30 + 80;
-            item.style.height = itemHeight + 'px';
-        }
-        item.classList.toggle('menu__item_active');
-        arrow.classList.toggle('menu__arrow_active');
-
-    }
-});
 </script>
