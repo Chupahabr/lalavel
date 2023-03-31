@@ -25,3 +25,6 @@ RUN apk --no-cache add --virtual .build_deps gettext shadow musl brotli libbz2 z
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN pecl install xdebug \
+ && docker-php-ext-enable xdebug

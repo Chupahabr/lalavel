@@ -35,6 +35,7 @@ services:
     volumes:
       - ./www:/var/www/laravel
       - ./php-conf/def-conf.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./php-conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
