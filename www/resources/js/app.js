@@ -3,17 +3,25 @@
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+// Подключение необходимых методов.
+// Метод vue для создания объекта
 import { createApp } from 'vue';
+// Подключение основного объекта роутера для маршрутизации
 import router from './router';
+// Подключение библиотеки axios для обращения по api и получения из него данных
 import axios from 'axios'
+// Модификация библиотеки axios для vue
 import VueAxios from 'vue-axios';
 
+// Инициализируем vue объект
 const Vue = createApp({});
 
+// Подключаем к объекту vue глобальные компоненты
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('v-header', require('./components/Header.vue').default);
 Vue.component('v-footer', require('./components/Footer.vue').default);
 
+// Прописываем использование ранее подключенных библиотек в компонентах vue
 Vue.use(router);
 Vue.use(VueAxios, axios);
 
