@@ -104,14 +104,12 @@ services:
       - laravel
     restart: always
 
-   #npm:
-   #  container_name: npm
-   #  build:
-   #    context: ./docker/npm
-   #  ports:
-   #    - 48:80
-   #  command:
-   #    - npm run watch
+  node:
+    container_name: node-laravel
+    build:
+      context: ./docker/node
+    ports:
+      - ${NODE_PORT}:80
 
 
 networks:
