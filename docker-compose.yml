@@ -11,6 +11,7 @@ services:
     volumes:
       - ./www:/var/www/laravel
       - ./nginx-conf:/etc/nginx/templates
+      - ./logs/nginx:/var/log/nginx/
     environment:
       VIRTUAL_HOST: ${GLOBAL_DOMAIN}
       GLOBAL_DOMAIN: ${GLOBAL_DOMAIN}
