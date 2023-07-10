@@ -21,3 +21,5 @@
 /www/npm-debug.log
 /www/yarn-error.log
 /www/.vscode
+
+/frontend/node_modules

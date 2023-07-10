@@ -10,7 +10,7 @@ services:
       - ${HOST_PORT}:80
     volumes:
       - ./www:/var/www/laravel
-      - ./nginx-conf:/etc/nginx/templates
+      - ./nginx-conf:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx/
     environment:
       VIRTUAL_HOST: ${GLOBAL_DOMAIN}
@@ -24,6 +24,7 @@ services:
       - laravel
     depends_on:
       - php-laravel
+      - nuxt-frontend-laravel
     restart: always
 
   php-fpm:
@@ -105,12 +106,18 @@ services:
       - laravel
     restart: always
 
-  node:
-    container_name: node-laravel
+  nuxt-frontend:
+    container_name: nuxt-frontend-laravel
     build:
-      context: ./docker/node
+      dockerfile: ./docker/node/Dockerfile
+      context: ./
+    volumes:
+      - ./frontend/components:/var/www/frontend/components
+    networks:
+      - laravel
     ports:
-      - ${NODE_PORT}:80
+      - ${NODE_PORT}:4000
+    restart: always
 
 
 networks:

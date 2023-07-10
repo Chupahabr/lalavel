@@ -1,3 +1,19 @@
-FROM node:19.9.0-alpine3.17
+FROM node:19.7.0-alpine3.17
 
-WORKDIR /var/www/laravel
+RUN mkdir -p /var/www/frontend
+WORKDIR /var/www/frontend
+
+COPY frontend/package*.json ./
+RUN npm install
+
+COPY ./frontend .
+
+RUN npm run build
+
+EXPOSE 4000
+
+ENV NUXT_HOST=0.0.0.0
+
+ENV NUXT_PORT=4000
+
+CMD [ "npm", "run", "dev" ]
